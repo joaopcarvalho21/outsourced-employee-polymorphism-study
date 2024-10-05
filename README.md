@@ -1,193 +1,160 @@
-Aqui está um modelo de README para o seu projeto:
 
----
+# Sistema de Pagamento de Funcionários
 
-# Employee Payment System
-
-Este projeto implementa um sistema simples para cálculo de pagamentos de funcionários. O sistema permite que os usuários insiram dados de funcionários, tanto funcionários regulares quanto terceirizados, e calcula seus pagamentos com base nas horas trabalhadas e no valor por hora.
+Projeto para estudo do curso de Java completo, Java POO - Polimorfismo e Herança.
+Este projeto é um sistema simples de gestão de pagamento de funcionários, escrito em Java. Ele permite que o usuário insira uma lista de funcionários e calcule seus respectivos pagamentos. O sistema diferencia entre funcionários regulares e terceirizados, aplicando regras de pagamento diferentes para cada tipo.
 
 ## Funcionalidades
 
-- Cadastro de funcionários com nome, horas trabalhadas e valor por hora.
-- Suporte para funcionários terceirizados, que possuem um adicional sobre o pagamento.
-- Cálculo automático do pagamento de cada funcionário, considerando o adicional no caso de funcionários terceirizados.
+- **Funcionário Regular**: O pagamento é calculado com base no número de horas trabalhadas multiplicado pelo valor por hora.
+- **Funcionário Terceirizado**: Além do pagamento regular, um funcionário terceirizado recebe uma cobrança adicional, que é incrementada em 10%.
 
-## Estrutura do Projeto
+## Classes
 
-O projeto é composto pelas seguintes classes:
+O sistema inclui três classes principais:
 
-1. **Employee** (classe base):
-   - Armazena o nome do funcionário, as horas trabalhadas e o valor por hora.
-   - Contém o método `payment()` que calcula o pagamento baseado nas horas e no valor por hora.
-
-2. **OutsourcedEmployee** (subclasse de `Employee`):
-   - Extende a classe `Employee` para incluir um adicional de pagamento para funcionários terceirizados.
-   - O método `payment()` calcula o pagamento base mais 110% do adicional.
-
-3. **Program** (classe principal):
-   - Permite a entrada de dados via console, registra os funcionários (regulares ou terceirizados), e imprime o pagamento de cada um.
+1. **Employee**: Classe base que representa um funcionário regular, com atributos como nome, horas trabalhadas e valor por hora.
+2. **OutsourcedEmployee**: Subclasse de `Employee` que representa um funcionário terceirizado e inclui uma cobrança adicional que é incrementada em 10%.
+3. **Program**: Classe principal que interage com o usuário, processa as entradas e exibe os detalhes de pagamento de cada funcionário.
 
 ## Como Funciona
 
 1. O programa solicita ao usuário o número de funcionários.
-2. Para cada funcionário, ele pergunta:
-   - Se o funcionário é terceirizado (`y` para sim, `n` para não).
-   - O nome do funcionário.
-   - As horas trabalhadas.
-   - O valor por hora.
-   - Se for terceirizado, o valor adicional.
-3. O programa calcula o pagamento:
-   - Para funcionários regulares, o pagamento é simplesmente o produto das horas pelo valor por hora.
-   - Para funcionários terceirizados, o pagamento inclui 110% do valor adicional informado.
-4. O programa imprime uma lista de pagamentos com o nome do funcionário e o valor total a ser pago.
+2. Para cada funcionário, o usuário informa se ele é terceirizado ou não, o nome, o número de horas trabalhadas e o valor por hora. Para os funcionários terceirizados, também é fornecida uma cobrança adicional.
+3. O sistema calcula o pagamento de cada funcionário e exibe o resultado.
 
-## Exemplo de Execução
+## Exemplo de Entrada e Saída
+
+```bash
+Digite o número de funcionários: 3
+Dados do funcionário #1:
+Terceirizado (y/n)? n
+Nome: João
+Horas: 40
+Valor por hora: 20.00
+
+Dados do funcionário #2:
+Terceirizado (y/n)? y
+Nome: Ana
+Horas: 40
+Valor por hora: 25.00
+Cobrança adicional: 200.00
+
+Dados do funcionário #3:
+Terceirizado (y/n)? n
+Nome: Bob
+Horas: 30
+Valor por hora: 15.00
+
+Pagamentos:
+João - R$800.00
+Ana - R$2700.00
+Bob - R$450.00
+```
+
+## Estrutura do Projeto
 
 ```
-Enter the number of employees: 2
-Employee #1 data:
-Outsourced (y/n)? y
-Name: John
-Hours: 50
-Value per hour: 20.00
-Additional charge: 200.00
-
-Employee #2 data:
-Outsourced (y/n)? n
-Name: Maria
-Hours: 60
-Value per hour: 15.00
-
-Payments:
-John - $1200.00
-Maria - $900.00
+/src
+  /application
+    Program.java  # Classe principal para executar a aplicação
+  /entities
+    Employee.java  # Classe que representa um funcionário regular
+    OutsourcedEmployee.java  # Classe que representa um funcionário terceirizado
 ```
-
-Neste exemplo, `John` é um funcionário terceirizado que trabalhou 50 horas a uma taxa de $20.00 por hora, com um adicional de $200.00. O pagamento final dele será $1200.00, que inclui as horas trabalhadas mais o adicional. Já `Maria`, que não é terceirizada, trabalhou 60 horas a $15.00 por hora e receberá $900.00.
-
-## Como Rodar o Projeto
-
-1. Clone o repositório.
-2. Compile e execute o programa em um ambiente que suporte Java (JDK 11 ou superior).
-3. Insira os dados conforme solicitado pelo programa.
 
 ## Requisitos
 
-- **Java 11+**
+- **Java**: Certifique-se de ter a versão mais recente do Kit de Desenvolvimento Java (JDK) instalada para compilar e executar o projeto.
 
-## Estrutura do Código
+## Executando o Projeto
 
-```
-src/
-│
-├── entities/
-│   ├── Employee.java
-│   ├── OutsourcedEmployee.java
-│
-└── application/
-    └── Program.java
-```
+1. Clone este repositório.
+   ```bash
+   git clone https://github.com/seu-usuario/sistema-pagamento-funcionarios.git
+   ```
+2. Compile e execute o programa:
+   ```bash
+   javac application/Program.java
+   java application.Program
+   ```
 
-### Employee.java
+Isso vai fornecer uma descrição completa e clara para o seu projeto em português no GitHub!
+# Employee Payment System
 
-```java
-package entities;
+This project is a simple employee payment management system written in Java. It allows users to input a list of employees and calculate their respective payments. The system distinguishes between regular employees and outsourced employees, applying different payment rules.
 
-public class Employee {
-    private String name;
-    private Integer hours;
-    private Double valuePerHour;
+## Features
 
-    public Employee(String name, Integer hours, Double valuePerHour) {
-        this.name = name;
-        this.hours = hours;
-        this.valuePerHour = valuePerHour;
-    }
+- **Regular Employee**: Payment is calculated based on the number of hours worked multiplied by the value per hour.
+- **Outsourced Employee**: In addition to the regular payment, an outsourced employee receives an additional charge, which is incremented by 10%.
 
-    public String getName() {
-        return name;
-    }
+## Classes
 
-    public double payment() {
-        return hours * valuePerHour;
-    }
-}
-```
+The system includes three main classes:
 
-### OutsourcedEmployee.java
+1. **Employee**: The base class representing a regular employee with attributes such as name, hours worked, and value per hour.
+2. **OutsourcedEmployee**: A subclass of `Employee` that represents an outsourced employee and includes an additional charge that is incremented by 10%.
+3. **Program**: The main class that interacts with the user, processes input, and displays the payment details for each employee.
 
-```java
-package entities;
+## How It Works
 
-public class OutsourcedEmployee extends Employee {
-    private Double additionalCharge;
+1. The program asks the user for the number of employees.
+2. For each employee, the user specifies whether they are outsourced or not, their name, hours worked, and value per hour. For outsourced employees, an additional charge is also provided.
+3. The system calculates the payment for each employee and displays the result.
 
-    public OutsourcedEmployee(String name, Integer hours, Double valuePerHour, Double additionalCharge) {
-        super(name, hours, valuePerHour);
-        this.additionalCharge = additionalCharge;
-    }
+## Example Input and Output
 
-    @Override
-    public double payment() {
-        return super.payment() + additionalCharge * 1.1;
-    }
-}
-```
+```bash
+Enter the number of employees: 3
+Employee #1 data:
+Outsourced (y/n)? n
+Name: John
+Hours: 40
+Value per hour: 20.00
 
-### Program.java
+Employee #2 data:
+Outsourced (y/n)? y
+Name: Anna
+Hours: 40
+Value per hour: 25.00
+Additional charge: 200.00
 
-```java
-package application;
+Employee #3 data:
+Outsourced (y/n)? n
+Name: Bob
+Hours: 30
+Value per hour: 15.00
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import entities.Employee;
-import entities.OutsourcedEmployee;
-
-public class Program {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        List<Employee> list = new ArrayList<>();
-
-        System.out.print("Enter the number of employees: ");
-        int n = sc.nextInt();
-
-        for (int i = 1; i <= n; i++) {
-            System.out.println("Employee #" + i + " data:");
-            System.out.print("Outsourced (y/n)? ");
-            char outSourced = sc.next().charAt(0);
-            System.out.print("Name: ");
-            sc.nextLine();
-            String name = sc.nextLine();
-            System.out.print("Hours: ");
-            Integer hours = sc.nextInt();
-            System.out.print("Value per hour: ");
-            double valuePerHour = sc.nextDouble();
-
-            if (outSourced == 'y') {
-                System.out.print("Additional charge: ");
-                double additionalCharge = sc.nextDouble();
-                list.add(new OutsourcedEmployee(name, hours, valuePerHour, additionalCharge));
-            } else {
-                list.add(new Employee(name, hours, valuePerHour));
-            }
-        }
-
-        System.out.println("\nPayments:");
-        for (Employee emp : list) {
-            System.out.println(emp.getName() + " - $" + String.format("%.2f", emp.payment()));
-        }
-
-        sc.close();
-    }
-}
+Payments:
+John - $800.00
+Anna - $2700.00
+Bob - $450.00
 ```
 
-## Licença
+## Project Structure
 
-Este projeto está sob a licença MIT.
+```
+/src
+  /application
+    Program.java  # Main class to run the application
+  /entities
+    Employee.java  # Class representing a regular employee
+    OutsourcedEmployee.java  # Class representing an outsourced employee
+```
 
----
+## Requirements
 
-Com isso, o seu projeto terá uma documentação clara e organizada para que outras pessoas possam entender e utilizá-lo facilmente.
+- **Java**: Make sure you have the latest version of the Java Development Kit (JDK) installed to compile and run the project.
+  
+## Running the Project
+
+1. Clone this repository.
+   ```bash
+   git clone https://github.com/seu-usuario/employee-payment-system.git
+   ```
+2. Compile and run the program:
+   ```bash
+   javac application/Program.java
+   java application.Program
+   ```
